@@ -6,18 +6,113 @@
 <title>Windsor Auto Detailing</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header><nav><b>Windsor Auto Detailing</b><a href="#contact">Get a Quote</a></nav></header>
+
+<header>
+  <nav>
+    <b id="business-name">Windsor Auto Detailing</b>
+    <a href="#contact">Get a Quote</a>
+  </nav>
+</header>
+
 <main>
-<section class="hero"><div><small>WINDSOR, ONTARIO</small><h1>Make your car look brand new.</h1><p>Professional interior and exterior detailing for cars, trucks, and SUVs.</p><a class="btn" href="#services">View Services</a></div></section>
-<section id="services"><small>OUR SERVICES</small><h2>Simple, professional detailing.</h2><div class="cards">
-<article><h3>Interior Detail</h3><p>Deep cleaning of seats, carpets, mats, dashboard and interior surfaces.</p><strong>$99</strong></article>
-<article><h3>Exterior Detail</h3><p>Hand wash, wheels, tires and a careful exterior finish.</p><strong>$79</strong></article>
-<article><h3>Full Detail</h3><p>Our complete interior and exterior package for a full refresh.</p><strong>$159</strong></article>
-</div></section>
-<section class="dark"><div><small>WHY US</small><h2>We treat every vehicle like our own.</h2><p>Locally owned in Windsor. Convenient appointments, careful work, and straightforward pricing.</p></div></section>
-<section id="contact" class="contact"><small>CONTACT</small><h2>Ready for a cleaner car?</h2><p>Call <b>(519) 555-0147</b> or email <b>hello@windsorautodetailing.example</b></p><a class="btn" href="mailto:hello@windsorautodetailing.example">Contact Us</a></section>
+
+<section class="hero">
+  <div>
+    <small>WINDSOR, ONTARIO</small>
+    <h1>Make your car look brand new.</h1>
+    <p>Professional interior and exterior detailing for cars, trucks, and SUVs.</p>
+    <a class="btn" href="#services">View Services</a>
+  </div>
+</section>
+
+<section id="services">
+  <small>OUR SERVICES</small>
+  <h2>Simple, professional detailing.</h2>
+
+  <div class="cards">
+
+    <article>
+      <h3>Interior Detail</h3>
+      <p>Deep cleaning of seats, carpets, mats, dashboard and interior surfaces.</p>
+      <strong>$<span id="interior-price">99</span></strong>
+    </article>
+
+    <article>
+      <h3>Exterior Detail</h3>
+      <p>Hand wash, wheels, tires and a careful exterior finish.</p>
+      <strong>$<span id="exterior-price">79</span></strong>
+    </article>
+
+    <article>
+      <h3>Full Detail</h3>
+      <p>Our complete interior and exterior package for a full refresh.</p>
+      <strong>$<span id="full-price">159</span></strong>
+    </article>
+
+  </div>
+</section>
+
+<section class="dark">
+  <div>
+    <small>WHY US</small>
+    <h2>We treat every vehicle like our own.</h2>
+    <p>Locally owned in Windsor. Convenient appointments, careful work, and straightforward pricing.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <small>CONTACT</small>
+  <h2>Ready for a cleaner car?</h2>
+  <p>Call <b>(519) 555-0147</b> or email <b>hello@windsorautodetailing.example</b></p>
+  <a class="btn" href="mailto:hello@windsorautodetailing.example">Contact Us</a>
+</section>
+
 </main>
+
 <footer>© 2026 Windsor Auto Detailing · Website demo</footer>
+
+<script>
+async function loadSiteData() {
+  try {
+    const response = await fetch("content/site.yml");
+    const text = await response.text();
+
+    const data = {};
+
+    text.split("\n").forEach(line => {
+      const match = line.match(/^(\w+):\s*"?([^"]*)"?$/);
+
+      if (match) {
+        data[match[1]] = match[2];
+      }
+    });
+
+    if (data.business_name) {
+      document.getElementById("business-name").textContent = data.business_name;
+      document.title = data.business_name;
+    }
+
+    if (data.interior_price) {
+      document.getElementById("interior-price").textContent = data.interior_price;
+    }
+
+    if (data.exterior_price) {
+      document.getElementById("exterior-price").textContent = data.exterior_price;
+    }
+
+    if (data.full_price) {
+      document.getElementById("full-price").textContent = data.full_price;
+    }
+
+  } catch (error) {
+    console.log("Could not load website information:", error);
+  }
+}
+
+loadSiteData();
+</script>
+
 </body>
 </html>
