@@ -22,7 +22,9 @@
   <div>
     <small>WINDSOR, ONTARIO</small>
     <h1>Make your car look brand new.</h1>
-    <p>Professional interior and exterior detailing for cars, trucks, and SUVs.</p>
+    <p id="description">
+      Professional interior and exterior detailing for cars, trucks, and SUVs.
+    </p>
     <a class="btn" href="#services">View Services</a>
   </div>
 </section>
@@ -34,20 +36,26 @@
   <div class="cards">
 
     <article>
-      <h3>Interior Detail</h3>
-      <p>Deep cleaning of seats, carpets, mats, dashboard and interior surfaces.</p>
+      <h3 id="interior-name">Interior Detail</h3>
+      <p id="interior-description">
+        Deep cleaning of seats, carpets, mats, dashboard and interior surfaces.
+      </p>
       <strong>$<span id="interior-price">99</span></strong>
     </article>
 
     <article>
-      <h3>Exterior Detail</h3>
-      <p>Hand wash, wheels, tires and a careful exterior finish.</p>
+      <h3 id="exterior-name">Exterior Detail</h3>
+      <p id="exterior-description">
+        Hand wash, wheels, tires and a careful exterior finish.
+      </p>
       <strong>$<span id="exterior-price">79</span></strong>
     </article>
 
     <article>
-      <h3>Full Detail</h3>
-      <p>Our complete interior and exterior package for a full refresh.</p>
+      <h3 id="full-name">Full Detail</h3>
+      <p id="full-description">
+        Our complete interior and exterior package for a full refresh.
+      </p>
       <strong>$<span id="full-price">159</span></strong>
     </article>
 
@@ -65,13 +73,32 @@
 <section id="contact" class="contact">
   <small>CONTACT</small>
   <h2>Ready for a cleaner car?</h2>
-  <p>Call <b>(519) 555-0147</b> or email <b>hello@windsorautodetailing.example</b></p>
-  <a class="btn" href="mailto:hello@windsorautodetailing.example">Contact Us</a>
+
+  <p>
+    Call <b id="phone">(519) 555-0147</b>
+    or email <b id="email">hello@windsorautodetailing.example</b>
+  </p>
+
+  <p>
+    <b id="address">Windsor, Ontario</b>
+  </p>
+
+  <p id="hours">
+    Monday - Friday: 9:00 AM - 6:00 PM<br>
+    Saturday: 9:00 AM - 4:00 PM<br>
+    Sunday: Closed
+  </p>
+
+  <a class="btn" id="email-button" href="mailto:hello@windsorautodetailing.example">
+    Contact Us
+  </a>
 </section>
 
 </main>
 
-<footer>© 2026 Windsor Auto Detailing · Website demo</footer>
+<footer>
+  © 2026 <span id="footer-business-name">Windsor Auto Detailing</span> · Website demo
+</footer>
 
 <script>
 async function loadSiteData() {
@@ -89,21 +116,42 @@ async function loadSiteData() {
       }
     });
 
-    if (data.business_name) {
-      document.getElementById("business-name").textContent = data.business_name;
-      document.title = data.business_name;
+    function setText(id, value) {
+      if (value) {
+        document.getElementById(id).textContent = value;
+      }
     }
 
-    if (data.interior_price) {
-      document.getElementById("interior-price").textContent = data.interior_price;
+    setText("business-name", data.business_name);
+    setText("footer-business-name", data.business_name);
+    setText("description", data.description);
+
+    setText("phone", data.phone);
+    setText("email", data.email);
+    setText("address", data.address);
+
+    setText("interior-name", data.interior_name);
+    setText("interior-description", data.interior_description);
+    setText("interior-price", data.interior_price);
+
+    setText("exterior-name", data.exterior_name);
+    setText("exterior-description", data.exterior_description);
+    setText("exterior-price", data.exterior_price);
+
+    setText("full-name", data.full_name);
+    setText("full-description", data.full_description);
+    setText("full-price", data.full_price);
+
+    if (data.email) {
+      document.getElementById("email-button").href =
+        "mailto:" + data.email;
     }
 
-    if (data.exterior_price) {
-      document.getElementById("exterior-price").textContent = data.exterior_price;
-    }
+    document.title = data.business_name || "Windsor Auto Detailing";
 
-    if (data.full_price) {
-      document.getElementById("full-price").textContent = data.full_price;
+    if (data.hours) {
+      document.getElementById("hours").innerHTML =
+        data.hours.replace(/\n/g, "<br>");
     }
 
   } catch (error) {
