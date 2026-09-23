@@ -1,4 +1,21 @@
-business_name: Windsor Auto Detailing TEST
-interior_price: 109
+business_name: "Windsor Auto Detailing"
+phone: "(519) 555-0147"
+email: "hello@windsorautodetailing.example"
+address: "Windsor, Ontario"
+hours: |
+  Monday - Friday: 9:00 AM - 6:00 PM
+  Saturday: 9:00 AM - 4:00 PM
+  Sunday: Closed
+description: "Professional interior and exterior detailing for cars, trucks, and SUVs."
+
+interior_name: "Interior Detail"
+interior_description: "Deep cleaning of seats, carpets, mats, dashboard and interior surfaces."
+interior_price: 99
+
+exterior_name: "Exterior Detail"
+exterior_description: "Hand wash, wheels, tires and a careful exterior finish."
 exterior_price: 79
+
+full_name: "Full Detail"
+full_description: "Our complete interior and exterior package for a full refresh."
 full_price: 159
